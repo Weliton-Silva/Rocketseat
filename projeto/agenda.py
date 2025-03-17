@@ -21,7 +21,7 @@ def exibir_contato():
     print("Lista de contatos: ")
     if contato:
         for nome, dados in contato.items():
-            print(f"Nome: {nome}, Telefone: {dados['telefone']}, Email: {dados['email']}, Favorito: {dados['favorito']}")
+            print(f"\nNome: {nome}, Telefone: {dados['telefone']}, Email: {dados['email']}, Favorito: {dados['favorito']}")
     else:
         print("Nenhum contato encontrado.")
     return
