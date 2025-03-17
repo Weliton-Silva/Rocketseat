@@ -5,6 +5,7 @@ def novo_contato(nome, telefone, email, favorito: False):
         "favorito": favorito
     }
     return
+
 def adicionar_contato():
     nome = input("Digite o nome do contato: ")
     telefone = input("Digite o número do contato: ")
