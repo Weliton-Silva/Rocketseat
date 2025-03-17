@@ -59,10 +59,73 @@ def editar_contato():
     except ValueError:
         print("Opção inválida! Por favor, insira um número válido.") 
 
+def editar_favorito():
+    if not contato:
+        print("Nenhum contato disponível para favoritar.")
+        return
 
+    print("\nLista de contatos disponíveis para favoritar:")
+    for i, nome in enumerate(contato, 1):
+        print(f"{i}. {nome} {'(Favorito)' if contato[nome]['favorito'] else ''}")
 
+    try:
+        escolha = int(input("Digite o número do contato que deseja salvar como favorito: ")) - 1
+        if escolha < 0 or escolha >= len(contato):
+            print("Opção inválida!")
+            return
 
+        nome_contato = list(contato.keys())[escolha]
+        contato[nome_contato]["favorito"] = True
+        print(f"{nome_contato} agora é um contato favorito!")
 
+    except ValueError:
+        print("Entrada inválida! Digite um número válido.")
+
+def remover_dos_favoritos():
+    favoritos = [nome for nome, dados in contato.items() if dados["favorito"]]
+
+    if not favoritos:
+        print("Nenhum contato favorito encontrado.")
+        return
+
+    print("\nLista de contatos favoritos:")
+    for i, nome in enumerate(favoritos, 1):
+        print(f"{i}. {nome}")
+
+    try:
+        escolha = int(input("Digite o número do contato que deseja remover dos favoritos: ")) - 1
+        if escolha < 0 or escolha >= len(favoritos):
+            print("Opção inválida!")
+            return
+
+        nome_contato = favoritos[escolha]
+        contato[nome_contato]["favorito"] = False
+        print(f"{nome_contato} foi removido da lista de favoritos.")
+
+    except ValueError:
+        print("Entrada inválida! Digite um número válido.")
+
+def apagando_contato():
+    if not contato:
+        print("Nenhum contato disponível para apagar.")
+        return
+
+    print("\nLista de contatos para remoção:")
+    for i, nome in enumerate(contato, 1):
+        print(f"{i}. {nome}")
+
+    try:
+        escolha = int(input("Digite o número do contato que deseja apagar: ")) - 1
+        if escolha < 0 or escolha >= len(contato):
+            print("Opção inválida!")
+            return
+
+        nome_contato = list(contato.keys())[escolha]
+        del contato[nome_contato]
+        print(f"O contato {nome_contato} foi apagado com sucesso!")
+
+    except ValueError:
+        print("Entrada inválida! Digite um número válido.")
 
 contato = {}
 titulo = "AGENDA DE CONTATOS"
@@ -87,6 +150,12 @@ while True:
         exibir_contato()
     elif escolha =="3":
         editar_contato()
+    elif escolha =="4":
+        editar_favorito()
+    elif escolha == "5":
+        remover_dos_favoritos()
+    elif escolha =="6":
+        apagando_contato()
     elif escolha == "7":
         print("Aplicação encerrada")
         break
